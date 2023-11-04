@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Oswald&family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
-/* base styles */
 * {
   margin: 0;
   font-family: "Quicksand";
-  color: #333;
+  color: #be5757;
+}
+html,body {
+  background-color: #333;
+  color: white;
 }
 .navbar {
   padding: 20px;
@@ -12,10 +16,13 @@
   align-items: center;
   max-width: 600px;
   margin: 0 auto;
-  border-bottom: 1px solid #f2f2f2;
 }
 .navbar h1 {
+  font-size: 2.3rem;
+  position: fixed;
+  top: 18px;
   color: #f1356d;
+  font-family: 'Dancing Script';
 }
 .navbar .links {
   margin-left: auto;
@@ -34,21 +41,22 @@
   padding: 20px;
 }
 
-/* blog previews / list */
+/* blog previews /list */
 .blog-preview {
-  padding: 10px 16px;
+  padding: 11px 28px;
   margin: 20px 0;
-  border-bottom: 1px solid #fafafa;
+  border: 1px solid #fafafa;
+  border-radius: 20px;
 }
 .blog-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }
 .blog-preview h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 8px;
 }
-.blog-preview a{
+.blog-preview a {
   text-decoration: none;
 }
 
@@ -70,16 +78,18 @@
   cursor: pointer;
 }
 
-/* create new blog form */
+/* create new Blog-Form */
 .create {
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
   text-align: center;
 }
+
 .create label {
   text-align: left;
-  display: block;
+  display: block; /*Responsible for show text and input-box on different line*/
 }
+
 .create h2 {
   font-size: 20px;
   color: #f1356d;
@@ -87,17 +97,57 @@
 }
 .create input, .create textarea, .create select {
   width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
+    padding: 6px 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: block;
+    backdrop-filter: brightness(1.5);
+    background-color: transparent;
 }
 .create button {
   background: #f1356d;
-  color: #fff;
+  color: white;
   border: 0;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
 }
+
+.navbar a:hover {
+  color: #be5757;
+}
+
+.navbar a .active {
+  background-color: #aa0404;
+  color: white;
+}
+
+.navbar .icon {
+  display: none;
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 425px) {
+  .navbar a {display: none;}
+  .navbar .icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .navbar.responsive {position: relative;}
+  .navbar.responsive .icon {
+    position: absolute;
+    right: -6px;
+    top: -2px;
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+

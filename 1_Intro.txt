@@ -1,0 +1,104 @@
+-----------------------LECTURE-12[JSON Server]-----------
+.........
+   --> Run in terminal 'npx json-server --watch data/db.json --port 8000'
+.........
+.........
+
+-----------------------LECTURE-15[Making Custom Hook]-------------
+As for now we are using useState each time we need it .
+But making it at each file as per requirement makes this thing AMBIGUOUS.
+Hence,
+We are trying to get our own 'custom hook'.
+
+1. Get the useFetch formate as avaible in the Home.js.
+2. Generalize it by some improvements like...
+   --> make blogs to data to give it a universal look.
+   --> pass url for the fetch purpose, inspite of specifying a particulare link.
+   --> return {data, isPending, error}.
+   You can get the value and change the name of parameter as..
+   const {data:var_name, isPending,...} = useFetch('...url...')
+
+----------------------LECTURE-16[React Router]---------------------
+In general non-react webpage, multi-page shifting occurs as...
+       a)Local Machine ----------(request for /contact.html)--------> Server
+       b)Local Machine <----(return complete "contact.html" page) --- Server
+
+In react app, this process occurs as...
+       a)Local Machine ----------(request for /index.html)--------> Server
+       
+       b)Local Machine |<----(return "index.html" page) --- |Server
+                       |<------(plus a 'js-bundle') ------- |
+
+         Now there is no need of 'server'
+         Local Machine ---------(request)-------> React js-bundle
+                 ^                                          |
+                 |                                          |
+                  ---(replace DOM with requested content)--- 
+
+1. Install router as ... 'npm install react-router-dom@5'
+   (version-5 is currently stable.... version-6 is in beta form and is being updated time to time)
+
+2. Import router in App.js.... and put complete return section in 'Router-tag'.
+3. Now make a <Switch> tag section which has...
+   <Switch>
+      <Route path="/">           |--------------------
+         <Home/>                 |--> Route/page -1
+      <Route>                    |--------------------
+      <Route path="/contact">    |--------------------
+         <Contact/>              |--> Route/page -2
+      <Route>                    |--------------------
+      <Route path="/...">        |--------------------
+         <.../>                  |--> route/Page-3
+      <Route>                    |--------------------
+      ...
+      ..
+      .
+   </Switch>
+Take care of this...
+--> The request is searched from top-to-bottom.
+--> If the path is even an initials of the path, it stops and fetch.
+    To avoid it we use keyword 'exact'.
+
+
+--------------------------LECTURE-17[Link tag and useEffect Cleanup]---------------
+1. <a href=".."> is only which send request to server inspite of the 'react js-bundle'
+   so use <Link to=".."> ..bs...
+2. if switching happens before complete fetch of the page, it gives ERROR(in console).
+   To resolve it we use 'cleanup' process which is done by "AboutController".
+   --> call it by... const abort= new AbortController();
+   --> return it by useEffect as 'return () => abortCont.abort()'
+   --> Error got catched but if error is of this type then we want different conditions..
+       so we put it in '.catch' section.
+
+-----------------------LECTURE-18[Route Parameters]-------------------
+/blog/:id
+--> ':id' is called Route Parameter.
+--> like /blog/123 
+         /blog/435
+         /blog/21...etc 
+(used to implement 'BlogDetails' in 'App.js')
+Now,we have to ...
+--> fetch the id from the url on webpage.
+--> show the details respectively in our DOM.
+(done in BlogDetails.js using 'useParams()').
+Finally,
+--> create each blog clickable and linked to a BlogDetails of its id.
+(done in BlogList.js)
+
+Now we are adding css for blogDetails page.
+And going to learn "Controlled Input" while making Create.js page.
+--> add useStates in create.js for each input-box and 
+    set values and onChange function for input-tag.
+--> Work over the Submit Event which occurs when clicked on 'Add blog' button.
+
+Making a POST Request....
+We can add it to useFetch.js to make a more universal hook.
+But for now, we are adding it to 'handleSubmit' in Create.js
+--> Added POST in it.
+--> Added a loadingEffect in it.
+--> Allow it to redirect to Home Page when submitted.
+    (done by useHistory hook)
+    history.go(-1) => go back 1 page.
+    history.go(1) => go ahead 1 page.
+    history.push('/') => go to mentioned page.
+--> Adding a DELETE button now.
